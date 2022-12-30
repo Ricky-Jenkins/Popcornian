@@ -1,21 +1,39 @@
 
 <script>
+    import { clickOutside } from "$lib/client/events";
+
     export let show = false;
 
     export let header = "";
 
     // Render props
     export let renderFooter = true;
+    export let dismissDialog = true;
 
     // styling props
     export let modalClass = "";
     export let bodyClass = "";
+
+    const onClickOutsideDialog = () => {
+        if (dismissDialog) {
+            show = false;
+        }
+    }
 </script>
 
 <!-- Modal toggle -->
 {#if show}
-    <div id="defaultModal" tabindex="-1" class="fixed z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0">
-        <div class="relative rounded-lg shadow bg-white dark:bg-neutral-800 {modalClass}">
+    <div
+            id="defaultModal"
+            tabindex="-1"
+            class="fixed z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
+    >
+        <div
+             class="relative rounded-lg shadow {modalClass}"
+             style="max-height: 80vh"
+             use:clickOutside
+             on:click_outside={onClickOutsideDialog}
+        >
             <!-- Modal header -->
             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600">
                 <slot name="header">
@@ -28,7 +46,7 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <div class={bodyClass}>
+            <div class="overflow-y-auto {bodyClass}">
                 <slot>
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
