@@ -13,7 +13,7 @@
 	<main class="w-full h-full dark:bg-neutral-800 bg-white">
 		<slot />
 	</main>
-	<footer>
+	<footer class="dark:bg-neutral-900 bg-white">
 		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
 	</footer>
 </div>
