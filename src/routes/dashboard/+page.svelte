@@ -6,6 +6,11 @@
 <script lang="ts">
     import JCard from "$lib/ui-library/Card/JCard.svelte";
     import JDialog from "$lib/ui-library/Dialog/Dialog.svelte";
+    import type { Film } from "$lib/types/media/Film";
+    import JButton from "$lib/ui-library/Button/JButton.svelte";
+    import Fa from 'svelte-fa/src/fa.svelte'
+    import {faEllipsisH, faFlag, faHeart, faShareAlt} from '@fortawesome/free-solid-svg-icons'
+
 
     export let data;
 
@@ -18,19 +23,55 @@
     <JDialog
             show="{!!selectedContent}"
             renderFooter={false}
-            bodyClass="w-full h-full"
-             modalClass="sm:w-full lg:w-3/6 mx-auto mt-20 h-full"
+             modalClass="lg:w-2/5 mx-auto mt-20 h-full bg-neutral-900"
     >
-        <div slot="header" class="w-full"><p class="text-center text-lg py-2 dark:text-white">{selectedContent.title}</p></div>
+        <div slot="header" class="w-full">
+            <p class="text-center text-lg dark:text-white">
+                {selectedContent.title}
+            </p>
+        </div>
         <div class="dark:text-white w-full bg-blend-multiply" id="dialog-body">
             <div
                     style={`background-image: url("${selectedContent?.poster}"); height:500px;`}
                     class="mx-auto bg-no-repeat bg-cover">
             </div>
-            <!--<img src={selectedContent.poster} class="bg-cover bg-center" />-->
-            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                {selectedContent.desc}
-            </p>
+
+            <div class="px-2 pt-2">
+                <ul>
+                    {#each selectedContent.directors as director }
+                        <li class="inline">
+                            { director }
+                            { selectedContent.directors.length > 1 ? ',' : '' }
+                        </li>
+                    {/each}
+                </ul>
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 py-2">
+                    {selectedContent.desc}
+                </p>
+                <div>
+                    <JButton>
+                        <div slot="prefix">
+                            <Fa icon={faFlag} class="mr-2" />
+                        </div>
+                        Watch
+                    </JButton>
+                    <JButton>
+                        <div slot="prefix">
+                            <Fa icon={faHeart} />
+                        </div>
+                    </JButton>
+                    <JButton>
+                        <div slot="prefix">
+                            <Fa icon={faShareAlt} />
+                        </div>
+                    </JButton>
+                    <JButton type="circle">
+                        <div slot="prefix">
+                            <Fa icon={faEllipsisH} />
+                        </div>
+                    </JButton>
+                </div>
+            </div>
         </div>
     </JDialog>
     <div class="grid grid-cols-12 gap-1">
