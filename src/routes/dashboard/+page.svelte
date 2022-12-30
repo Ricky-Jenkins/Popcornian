@@ -3,13 +3,13 @@
     <meta name="description" content="About this app" />
 </svelte:head>
 
-<script>
+<script lang="ts">
     import JCard from "$lib/ui-library/Card/JCard.svelte";
     import JDialog from "$lib/ui-library/Dialog/Dialog.svelte";
 
     export let data;
 
-    let selectedContent = null;
+    let selectedContent: Film | null = null;
 
 
 </script>
