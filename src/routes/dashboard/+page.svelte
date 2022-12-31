@@ -23,7 +23,7 @@
     <JDialog
             show="{!!selectedContent}"
             renderFooter={false}
-             modalClass="lg:w-2/5 mx-auto mt-20 h-full bg-neutral-900"
+             modalClass="lg:w-2/5 mx-auto mt-20 h-full bg-neutral-900 overflow-y-auto"
     >
         <div slot="header" class="w-full">
             <p class="text-center text-lg dark:text-white">
@@ -38,6 +38,7 @@
 
             <div class="px-2 pt-2">
                 <ul>
+                    <label class="inline">Directors:</label>
                     {#each selectedContent.directors as director }
                         <li class="inline">
                             { director }
@@ -45,31 +46,31 @@
                         </li>
                     {/each}
                 </ul>
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 py-2">
-                    {selectedContent.desc}
-                </p>
-                <div>
-                    <JButton>
-                        <div slot="prefix">
-                            <Fa icon={faFlag} class="mr-2" />
-                        </div>
+                <div class="py-4">
+                    <JButton class="rounded-3xl text-lg">
                         Watch
                     </JButton>
-                    <JButton>
+                    <JButton type="circle" class="dark:bg-transparent dark:hover:bg-neutral-700 border border-neutral-600 px-3 py-3">
                         <div slot="prefix">
                             <Fa icon={faHeart} />
                         </div>
                     </JButton>
-                    <JButton>
+                    <JButton type="circle" class="dark:bg-transparent dark:hover:bg-neutral-700 border border-neutral-600 px-3 py-3">
                         <div slot="prefix">
                             <Fa icon={faShareAlt} />
                         </div>
                     </JButton>
-                    <JButton type="circle">
+                    <JButton type="circle" class="dark:bg-transparent dark:hover:bg-neutral-700 border border-neutral-600 px-3 py-3">
                         <div slot="prefix">
                             <Fa icon={faEllipsisH} />
                         </div>
                     </JButton>
+                </div>
+                <div class="m-4">
+                    <p class="text-xl text-white uppercase py-2">Storyline</p>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 py-2">
+                        {selectedContent.desc}
+                    </p>
                 </div>
             </div>
         </div>
